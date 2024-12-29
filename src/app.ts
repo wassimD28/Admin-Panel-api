@@ -10,7 +10,14 @@ const app = express();
 const httpServer = createServer(app);
 
 app.use(express.json());
-app.use(cors()); // to let the front-end access the api
+app.use(
+  cors({
+    origin: "*", // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    credentials: true, 
+  })
+);
+
 
 // Serve static files for uploaded images
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
